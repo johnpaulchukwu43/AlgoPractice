@@ -1,6 +1,7 @@
 package com.jworks;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StringPractice2 {
 
@@ -23,15 +24,40 @@ public class StringPractice2 {
         * Works fine but has complexity of o(n2), not so ideal ;(
         * */
 
-        for (int num : nums) {
+        for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums.length; j++) {
 
-                if ((num + nums[j + 1]) == target)
-                    return new int[]{num, nums[j + 1]};
+                if ((nums[i] + nums[j + 1]) == target)
+                    return new int[]{i,j+1};
             }
         }
 
-        return new int[]{};
+        throw new IllegalArgumentException("None of the pairs sum to the target");
+    }
+
+    private static int[] twoSumOptimizedApproach(int[] nums, int target) {
+
+        /*
+        * Here we lop through once and use a hashMap to store the possible complements.
+        * Complement  =  target - x, where x is a number in the list.
+        * At the same time we perform a lookup to see if any complements our target.
+        * By so doing,complexity of becomes o(1). Thanks to our HashMap ;)
+        * */
+
+        Map<Integer,Integer> complementsAndPositionMap = new HashMap();
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+
+            if(complementsAndPositionMap.containsKey(complement)){
+
+                return new int[]{complementsAndPositionMap.get(complement), i};
+            }
+
+            complementsAndPositionMap.put(nums[i],i);
+        }
+
+        throw new IllegalArgumentException("None of the pairs sum to the target");
     }
 
 }
