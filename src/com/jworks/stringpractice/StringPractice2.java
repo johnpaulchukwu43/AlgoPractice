@@ -1,4 +1,4 @@
-package com.jworks;
+package com.jworks.stringpractice;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.jworks;
+package com.jworks.stringpractice;
 
 /*
         Question1
@@ -8,7 +8,7 @@ package com.jworks;
 
 public class StringPractice1 {
 
-    private static boolean isUniqueCharacterString(String input){
+    public static boolean isUniqueCharacterString(String input){
 
         int inputLength = input.length();
         //Assuming the characters are ASCII then there are 256 possible values
