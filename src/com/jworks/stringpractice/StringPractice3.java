@@ -13,6 +13,7 @@ public class StringPractice3 {
         * A naive approach; we loop through every char and get all possible substring.
         * For each substring gotten we check if they have a unique characters.
         * If so, then we assign the length of the current substring as the largest unique substring until a longer unique one is found
+        * Time complexity for this would be O(n3) .. Omo !!!!!
         * */
 
         int length = input.length();
