@@ -22,4 +22,27 @@ public class ArrayPractice2 {
          Arrays.sort(squaredArray);
         return squaredArray;
     }
+
+    public static int[] sortedSquaresOptimalApproach(int[] numArray) {
+        int length = numArray.length;
+
+        int[] squaredArray = new int[length];
+
+        int leftPointer = 0;
+        int rightPointer = length -1;
+
+        for (int i = length -1; i >=0; i--) {
+            int squared;
+            if(Math.abs(numArray[leftPointer]) > Math.abs(numArray[rightPointer])){
+                squared = numArray[leftPointer] * numArray[leftPointer];
+                leftPointer +=1;
+            }else{
+                squared = numArray[rightPointer] * numArray[rightPointer];
+                rightPointer -=1;
+            }
+
+            squaredArray[i] = squared;
+        }
+        return squaredArray;
+    }
 }
