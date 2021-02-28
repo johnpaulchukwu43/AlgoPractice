@@ -26,4 +26,39 @@ public class ArrayPractice4 {
 
         return nums1;
     }
+    
+    public static int[] moreOptimalMergeApproach(int[] nums1, int m, int[] nums2, int n) {
+        
+        /*
+            Approach taken:
+            1. Create a copy of nums1 as nums1Copy
+            2. Create a read cursor R1 , and point to begin of nums1Copy
+            3. Create a read cursor R2, and point to begin of nums2
+            4. Create a write pointer W1 and point to begin of nums1
+            5. While W1 is still within nums1 length, check:
+                i. if nums1Copy [R1] exists and is less than or equal to nums2[R2]:
+                        write nums1Copy [R1] into nums1[W1], increment R1
+                    else:
+                        write nums2 [R2] into nums1[W1], increment R2
+                ii. increment W2
+        */
+        
+        int[] nums1Copy = new int[m];
+        for (int i = 0; i < m; i++) {
+            nums1Copy[i] = nums1[i];
+        }
+        
+        int R1 = 0;
+        int R2 = 0;
+    
+        for(int w1 = 0; w1< m+n;w1++){
+            
+            if(R2 >= n || (R1<m && nums1Copy[R1] < nums2[R2])){
+                nums1[w1] = nums1Copy[R1++];
+            }else{
+                nums1[w1] = nums2[R2++];
+            }
+        }
+        return nums1;
+    }
 }
