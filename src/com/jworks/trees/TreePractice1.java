@@ -40,6 +40,8 @@ public class TreePractice1 {
 
         if(prevValue != null && currentRoot.val <= prevValue) return false;
 
+        prevValue = currentRoot.val;
+
         return InorderDFSApproachForIsValidBST(currentRoot.right);
 
     }}
