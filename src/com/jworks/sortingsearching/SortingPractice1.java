@@ -53,6 +53,44 @@ public class SortingPractice1 {
 
     }
 
+    public List<String> topKFrequentHeapApproach(String[] words, int k){
+        /*
+        * Approach taken:
+        * 1. We make use of our hash map HM, to keep track of words and their frequency;
+        * 2. for each word in the WORDS and its count , we add it to the HM
+        * 3. Initialize our PriorityQueue(max heap) PQ.
+        * 4. We add all our values in HM to PQ.
+        * 5. while adding values from HM to PQ:
+        *       a. if PQ.size is equal to k then we poll PQ
+        * 6. After adding values to PQ, then we poll each item to a list LI
+        * 7. Reverse LI
+        *
+        * Time Complexity: O(N log k), where N is the length of words. We count the frequency of each word in O(N) time,
+        *  then we add N words to the heap, each in O(log k) time.
+        * Finally, we pop from the heap up to k times. As k ≤ N, this is O(N log k) in total.
+        *
+        * Space Complexity: O(N), the space used to store our count.
+        * */
+
+        Map<String, Integer> wordCountMap = new HashMap<>();
+
+        for (String word : words) {
+            wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
+        }
+
+        PriorityQueue<String> priorityQueue = new PriorityQueue<>(new WordCountComparator(wordCountMap));
+
+        for (String word :wordCountMap.keySet()) {
+            priorityQueue.add(word);
+            if(priorityQueue.size() > k) priorityQueue.poll();
+        }
+
+        List<String> topFrequentList = new ArrayList<>();
+        while (!priorityQueue.isEmpty()) topFrequentList.add(priorityQueue.poll());
+        Collections.reverse(topFrequentList);
+        return topFrequentList;
+    }
+
 
     static class WordCountComparator implements Comparator<String>{
 
