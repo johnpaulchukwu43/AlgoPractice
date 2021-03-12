@@ -32,6 +32,10 @@ public class TreePractice1 {
 
     public boolean InorderDFSApproachForIsValidBST(TreeNode currentRoot){
 
+        /*
+        * NB: if its a valid BST, then the inorder traversal of it, would give the values in increasing order
+        * */
+
         if(currentRoot == null) return true;
 
         if(!InorderDFSApproachForIsValidBST(currentRoot.left)){
