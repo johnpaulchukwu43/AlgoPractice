@@ -4,7 +4,37 @@ public class DynamicProgrammingPractice1 {
 
    /* Given a string s, return the longest palindromic substring in s.*/
 
+    int resultStart;
+    int resultLength;
 
+    public static void main(String[] args) {
+        // write your code here
+        System.out.println(new DynamicProgrammingPractice1().longestPalindromeMoreOptimalApproach("cbbd"));
+    }
+
+    public String longestPalindromeMoreOptimalApproach(String s) {
+        int strLength = s.length();
+        if (strLength < 2) {
+            return s;
+        }
+        for (int start = 0; start < strLength - 1; start++) {
+            expandRange(s, start, start);
+            expandRange(s, start, start + 1);
+        }
+        return s.substring(resultStart, resultStart + resultLength);
+    }
+
+    private void expandRange(String str, int begin, int end) {
+        while (begin >= 0 && end < str.length() &&
+                str.charAt(begin) == str.charAt(end)) {
+            begin--;
+            end++;
+        }
+        if (resultLength < end - begin - 1) {
+            resultStart = begin + 1;
+            resultLength = end - begin - 1;
+        }
+    }
 
     public String longestPalindromeNaiveApproach(String word) {
 
