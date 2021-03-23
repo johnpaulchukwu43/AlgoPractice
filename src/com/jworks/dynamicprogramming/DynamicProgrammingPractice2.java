@@ -12,7 +12,35 @@ public class DynamicProgrammingPractice2 {
     public static void main(String[] args) {
         // write your code here
 
-        System.out.println(new DynamicProgrammingPractice2().maxSubArrayMergeSortApproach(new int[]{5, 4, -1, 7, 8}));
+        System.out.println(new DynamicProgrammingPractice2().maxSubArrayGreedyApproach(new int[]{5, 4, -1, 7, 8}));
+    }
+
+    public int maxSubArrayGreedyApproach(int[] nums){
+        /*
+        * Approach Taken
+        *  The greedy Algorithm is concerned with solving problems by
+        *  making optimal choices at local level that would lead to global optimum solution.
+        * 1. We can have a current sum CS (acting as our local level) and a max sum MS(acting as our Global level)
+        * 2. We initialize CS, MS to the first number in the NUMS array
+        * 3. Loop through NUMS from the second element [index 1] to End of array as NUM:
+        *   a. check is  CS + NUM > NUM, if so then CS = CS + NUM.
+        *   b. check is CS > MS, if so then MS = CS
+        *
+        * 4. return MS
+        *
+        * TIme complexity = O(N) :)
+        * Space Complexity: O(1)
+        * */
+
+        int currentSum = nums[0];
+        int maxSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        return maxSum;
     }
 
 
