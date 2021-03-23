@@ -1,10 +1,18 @@
 package com.jworks.stringpractice;
 
+import java.util.HashSet;
+
 import static com.jworks.stringpractice.StringPractice1.isUniqueCharacterString;
 
 public class StringPractice3 {
 
 //    Given a string s, find the length of the longest substring without repeating characters. "pwwkew"
+
+    public static void main(String[] args) {
+        // write your code here
+
+        System.out.println(lengthOfLongestSubstringSlidingWindowApproach("abcabcbb"));
+    }
 
 
     public static int lengthOfLongestSubstringBruteForceApproach(String input) {
@@ -34,6 +42,53 @@ public class StringPractice3 {
         }
 
         return longestSubString;
+    }
+
+    public static int lengthOfLongestSubstringSlidingWindowApproach(String input) {
+
+        /*
+        *
+        * So for this approach we make use of:
+        * 1. Two pointers  R1 , R2
+        *
+        * 2. Hashset HS to keep track of distinct characters
+        *
+        * 3. Var Max to keep track of max count.
+        *
+        * 4. We set R1, R2 to start at the beginning of the string
+        *
+        * 5. While looping through the string input:
+        *   a. Check does HS contain charAt position R2
+        *   b. if it doesn't  then add  charAt position R2 to HS and increment R2 and  set Max to the bigger value of the size of HS and current MAX
+        *   c. Else, remove charAt position R1 in HS, and increment R1
+        *
+        *
+        * */
+
+        int R1 = 0;
+        int R2 = 0;
+        int max = 0;
+
+        HashSet<Character> hashSet = new HashSet<>();
+
+        while (R2< input.length()){
+
+            if(!hashSet.contains(input.charAt(R2))){
+                hashSet.add(input.charAt(R2));
+                max = Math.max(hashSet.size(),max);
+                R2++;
+            }else{
+
+                hashSet.remove(input.charAt(R1));
+                R1++;
+
+            }
+
+        }
+
+
+        return max;
+
     }
 
 }
